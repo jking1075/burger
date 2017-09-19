@@ -6,17 +6,26 @@
 	// Read - select
 	// Update - Set
 	// Delete from
-
- function getAllRecords(callback){
- 	var query = "SELECT * FROM burgers";
- 	connection.query(query, function (error, results, fields) {
- 		callback(results);
- 	});
-
+var orm = {
+	all: function(tableInput, cb){
+		connection.query('SELECT * FROM '+tableInput+';', function(err, result){
+			if(err) throw err;
+			cb(result)
+		})
+	}
 }
 
-getAllRecords(function(arr){
-	for(var i = 0; i< arr.length; i++){
-		console.log(arr[i].burger_name);
-	}
-});
+module.exports = orm;
+// function getAllRecords(callback){
+// 	var query = "SELECT * FROM burgers";
+//		connection.query(query, function (error, results, fields) {
+// 		callback(results);
+// 	});
+
+//}
+
+//getAllRecords(function(arr){
+//	for(var i = 0; i< arr.length; i++){
+//		console.log(arr[i].burger_name);
+//	}
+//});
